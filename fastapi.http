@@ -1,0 +1,36 @@
+### 路径请求参数【汉字需要编码】
+GET {{url}}/songs/song/1/%E5%91%A8%E6%9D%B0%E4%BC%A6
+Accept: */*
+Cache-Control: no-cache
+
+### Query请求参数
+GET {{url}}/songs/song/list_sones?page=2&size=15
+Accept: */*
+Cache-Control: no-cache
+
+### 请求体参数
+POST {{url}}/songs/song/save
+Accept: */*
+Cache-Control: no-cache
+Content-Type:  application/json
+
+{
+  "name": "倒影",
+  "album": "最伟大的作品",
+  "year": 2022
+}
+
+### HTML响应体
+GET {{url}}/res/html
+Accept: */*
+Cache-Control: no-cache
+
+### HTML响应体V2
+GET {{url}}/res/html_v2
+Accept: */*
+Cache-Control: no-cache
+
+### 自定义响应类
+GET {{url}}/res/custom
+Accept: */*
+Cache-Control: no-cache
