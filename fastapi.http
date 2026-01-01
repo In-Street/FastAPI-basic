@@ -34,3 +34,8 @@ Cache-Control: no-cache
 GET {{url}}/res/custom
 Accept: */*
 Cache-Control: no-cache
+
+### 依赖注入项
+GET {{url}}/di/news_list?page=12&size=50
+Accept: */*
+Cache-Control: no-cache
