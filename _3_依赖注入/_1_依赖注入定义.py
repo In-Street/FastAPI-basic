@@ -22,7 +22,7 @@ async def common_params(
 # 声明依赖项
 @dependency_injection.get('/news_list')
 async def news_list(com=Depends(common_params)):
-	from main import app_resource
+	from common import app_resource
 	return {'com': com, ' global': app_resource.get('global_a')}
 
 

@@ -30,7 +30,6 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.sql.functions import now
 from sqlalchemy import func
 
-
 db_url = 'mysql+aiomysql://root:taylor18@localhost:3306/fastapi'
 
 # 1. 创建异步引擎
@@ -63,7 +62,10 @@ class BookModel(BaseModel):
 
 
 # 3. 定义建表函数，在应用启动时创建表。  @app.on_event('startup')  被弃用，替换使用 lifespan
-async def create_table():
+async def create_table(app_resource:dict):
 	# 获取异步引擎 - 开启事物 - 建表
 	async with async_db_engine.begin() as conn:
 		await conn.run_sync(BaseModel.metadata.create_all)  # 模型类元数据创建
+
+	import common
+	app_resource[common.DB_ENGIN] = async_db_engine
