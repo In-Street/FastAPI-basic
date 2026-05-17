@@ -22,7 +22,7 @@
 
 	3. 在接口参数中指定依赖项，进行数据库操作
 """
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 import common
@@ -43,9 +43,9 @@ async def get_session():
 		try:
 			yield db_session   # 此处使用 yield 返回，原因看上面文档注释第二点
 			await db_session.commit()
-		except:
+		except Exception as e:
 			await db_session.rollback()
-			raise
+			raise HTTPException(status_code=500, detail=f'数据库操作失败：{str(e)}')
 		# finally:
 		# 	await db_session.close()  #  finally 块冗余，在 async with 上下文管理中，会自动调用close()
 

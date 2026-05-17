@@ -4,9 +4,13 @@ from typing import Any, Dict
 from fastapi import FastAPI
 from _1_路由._1_请求参数 import song_api_router
 from _1_路由._2_响应体 import response_router
-from _4_ORM._2_查询 import search_router
 from _3_依赖注入._1_依赖注入定义 import dependency_injection
 from _4_ORM._1_建表 import create_table
+from _4_ORM._2_查询 import search_router
+from _4_ORM._3_条件查询 import where_search
+from _4_ORM._4_聚合查询 import group_search_router
+from _4_ORM._5_分页查询 import page_router
+from _4_ORM._6_插入_更新_删除 import add_router
 
 import common
 
@@ -33,10 +37,17 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title='初次见面FastAPI', version='1.0', lifespan=lifespan)  # FastAPI 实例
 
+from _2_中间件._1_中间件定义 import register_middleware
+register_middleware(app)  # 调用注册函数，将中间件绑定到app
+
 app.include_router(song_api_router, prefix="/songs")  # song api路由注册
 app.include_router(response_router, prefix="/res")
 app.include_router(dependency_injection)
 app.include_router(search_router)
+app.include_router(where_search)
+app.include_router(group_search_router)
+app.include_router(page_router)
+app.include_router(add_router)
 
 
 @app.get("/")

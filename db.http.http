@@ -2,3 +2,58 @@
 GET {{url}}/search/books
 Accept: */*
 Cache-Control: no-cache
+
+### 条件查询【id】
+GET {{url}}/where_search/by_id/5?create_time=2026-01-01T16:54:26&price=1.25
+Accept: */*
+Cache-Control: no-cache
+
+### 模糊查询
+GET {{url}}/where_search/likes?book_name=晴
+Accept: */*
+Cache-Control: no-cache
+
+### 聚合-func
+GET {{url}}/group_search/func_test
+Accept: */*
+Cache-Control: no-cache
+
+### 分页查询
+GET {{url}}/page/search?page=2&size=2
+Accept: */*
+Cache-Control: no-cache
+
+
+### 添加数据
+POST {{url}}/add/add_book
+Accept: */*
+Cache-Control: no-cache
+Content-Type:  application/json
+
+{
+  "name": "luther",
+  "author": "Kendrick Lamar",
+  "publisher": "Live"
+}
+
+### 更新数据
+POST {{url}}/add/update_book/9
+Accept: */*
+Cache-Control: no-cache
+Content-Type:  application/json
+
+{
+  "author": "Kendrick Lamar"
+}
+
+### 更新数据 - 使用 update()
+POST {{url}}/add/update_book_2/9
+Accept: */*
+Cache-Control: no-cache
+Content-Type:  application/json
+
+{
+  "name": "luther",
+  "author": "Kendrick",
+  "publisher": "LL"
+}

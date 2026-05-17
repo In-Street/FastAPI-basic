@@ -47,8 +47,8 @@ async_db_engine = create_async_engine(
 # 2. 定义模型类  /dɪˈklærətɪv/
 class BaseModel(DeclarativeBase):
 	# 前者python中datetime，后者 sqlalchemy中DateTime
-	create_time: Mapped[datetime] = mapped_column(DateTime, default=func.now, insert_default=func.now)
-	update_time: Mapped[datetime] = mapped_column(DateTime, default=now, insert_default=now, onupdate=now)
+	create_time: Mapped[datetime] = mapped_column(DateTime, default=func.now(), insert_default=func.now())
+	update_time: Mapped[datetime] = mapped_column(DateTime, default=func.now(), insert_default=func.now(), onupdate=func.now())
 
 
 class BookModel(BaseModel):
